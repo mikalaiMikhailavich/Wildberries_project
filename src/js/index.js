@@ -1,7 +1,7 @@
 import { discount, discount2 } from "./utils/tools";
 import { createImageComponent } from "./components/createElements/index";
 import { createCardItemComponent } from "./components/createCard/cardItem";
-
+import { createInputComponent } from "./components/createElements/input";
 let itemProperty = {
   id: "x",
   imageUrl: "http://loremflickr.com/640/480/cats",
@@ -25,3 +25,6 @@ function loadTodos(cardDataList) {
 }
 loadTodos(source);
 // root.append(createCardItemComponent(itemProperty));
+const input = createInputComponent({ placeholder: "ewwadas" });
+
+root.append(input);
