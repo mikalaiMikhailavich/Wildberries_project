@@ -6,7 +6,7 @@ const createElement = (className, value) =>
     className,
   });
 
-export const createButtonComponent = (props = {}) => {
+export const createButtonElement = (props = {}) => {
   const { className, value, onClick } = props;
 
   const element = createElement(className, value);
