@@ -1,20 +1,21 @@
 import {
   renderElement,
   createButtonElement,
+  createImageComponent,
   createCheckboxComponent,
   createContainerComponent,
   createTextboxComponent,
 } from "../createElements/index";
 
 export const createCardItemComponent = (data) => {
-  const { id, name, inBasket, src, alt, discount, priceValue } = data;
+  const { id, name, inBasket, imageUrl, alt, discount, priceValue } = data;
   const card = createContainerComponent({
     id,
     className: inBasket ? "card card__inBasket" : "card",
   });
 
   const image = createImageComponent({
-    src: src,
+    src: imageUrl,
     alt: alt,
     className: "image card__image",
   });
@@ -38,8 +39,8 @@ export const createCardItemComponent = (data) => {
     children: [discountValue, buttonToBasket],
   });
 
-  const priceDiscount = renderElement({
-    innerHTML: `${priceValue - priceValue * discount}`,
+  const priceDiscount = renderElement("div", {
+    innerHTML: `${(priceValue - priceValue * discount * 0, 01)}`,
     className: "card__price",
   });
 
@@ -60,6 +61,6 @@ export const createCardItemComponent = (data) => {
     price,
     cardName
   );
-
+  console.log(card);
   return card;
 };
