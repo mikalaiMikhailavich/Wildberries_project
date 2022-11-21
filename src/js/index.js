@@ -11,7 +11,18 @@ let itemProperty = {
   name: "x",
   alt: "x",
 };
-let source = [itemProperty];
+let source = [
+  itemProperty,
+  itemProperty,
+  itemProperty,
+  itemProperty,
+  itemProperty,
+  itemProperty,
+  itemProperty,
+  itemProperty,
+  itemProperty,
+  itemProperty,
+];
 console.log(discount);
 console.log(discount2);
 
