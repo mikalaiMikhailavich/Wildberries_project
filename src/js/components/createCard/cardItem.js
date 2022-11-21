@@ -36,6 +36,7 @@ export const createCardItemComponent = (data) => {
   });
 
   const discountValueAndButtonToBasketContainer = createContainerComponent({
+    className: "card__discount-and-button-container",
     children: [discountValue, buttonToBasket],
   });
 
@@ -49,6 +50,11 @@ export const createCardItemComponent = (data) => {
     className: "card__price card__price_crossed-out",
   });
 
+  const priceDiscountAndPriceContainer = createContainerComponent({
+    className: "card__price-and-price-discount-container",
+    children: [priceDiscount, price],
+  });
+
   const cardName = renderElement("div", {
     innerHTML: name,
   });
@@ -57,8 +63,7 @@ export const createCardItemComponent = (data) => {
     image,
     buttonOpenCard,
     discountValueAndButtonToBasketContainer,
-    priceDiscount,
-    price,
+    priceDiscountAndPriceContainer,
     cardName
   );
   console.log(card);
