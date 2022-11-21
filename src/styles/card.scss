@@ -1,0 +1,49 @@
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  border: 1px solid $main-color;
+  border-radius: 15px;
+
+  &__image {
+    border-radius: 15px;
+    max-height: 220px;
+  }
+  &__discount-and-button-container {
+    position: absolute;
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    bottom: 65px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  &__price-and-price-discount-container {
+    margin-top: 15px;
+    display: flex;
+    justify-content: space-around;
+  }
+
+  &:hover .button__modal {
+    opacity: 1;
+  }
+}
+
+.button {
+  width: 180px;
+  &__modal {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 30px;
+    opacity: 0;
+    transition: all 0.3s;
+  }
+}
+
+.image {
+  width: 100%;
+  display: block;
+}
