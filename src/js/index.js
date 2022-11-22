@@ -36,6 +36,32 @@ function loadTodos(cardDataList) {
 }
 loadTodos(source);
 // root.append(createCardItemComponent(itemProperty));
-const input = createInputComponent({ placeholder: "ewwadas" });
 
-root.append(input);
+// const input = createInputComponent({ placeholder: "ewwadas" });
+const image = createImageComponent({});
+image.src = "/exampleImage.jpg";
+root.append(image);
+
+const xmlns = "http://www.w3.org/2000/svg";
+const boxWidth = 64;
+const boxHeight = 64;
+
+const svg = document.createElementNS(xmlns, "svg");
+svg.setAttributeNS(
+  null,
+  "viewBox",
+  "0 0 " + boxWidth / 2 + " " + boxHeight / 2
+);
+svg.setAttributeNS(null, "width", boxWidth);
+svg.setAttributeNS(null, "height", boxHeight);
+
+const circle = document.createElementNS(xmlns, "circle");
+circle.setAttributeNS(null, "cx", "50%");
+circle.setAttributeNS(null, "cy", "50%");
+circle.setAttributeNS(null, "r", "15");
+circle.setAttributeNS(null, "stroke-width", "1px");
+circle.setAttributeNS(null, "stroke", "red");
+
+svg.append(circle);
+
+document.body.append(svg);
