@@ -45,5 +45,11 @@ const svgi = document.createElement("div");
 svgi.innerHTML = svgBasket;
 svgi.style.stroke = "red";
 svgi.style.background = "blue";
+svgi.style.background = "blue";
+svgi.setAttribute("fill", "orange");
 root.append(svgi);
-root.append(image);
+// root.append(image);
+
+let path = document.querySelector("path");
+path.removeAttribute("fill");
+console.log(path);
