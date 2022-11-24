@@ -1,2 +1,35 @@
 @import "variables";
-@import "card.scss";
+@import "card";
+@import "header";
+
+*,
+*:before,
+*::after {
+  margin: 0;
+  padding: 0;
+  // border: 1px solid red;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  padding-left: 15px;
+  padding-right: 15px;
+  margin: 0 auto;
+}
+
+.displayOn {
+  display: block;
+}

@@ -1,0 +1,30 @@
+.header {
+  background: url(../assets/img/header-background-image.jpg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  &__container {
+    display: flex;
+    position: relative;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__logo-container {
+    width: 240px;
+    height: 64px;
+  }
+
+  &__dropdown {
+    background-color: white;
+    display: none;
+    position: absolute;
+    top: 70%;
+    left: 100%;
+    transform: translateX(-100%);
+  }
+
+  &__dropdown-container {
+    display: flex;
+  }
+}
