@@ -1,7 +1,6 @@
-import { discount, discount2 } from "./utils/tools";
-import { createImageComponent } from "./components/createElements/index";
 import { createCardItemComponent } from "./components/createCard/cardItem";
-import { createInputComponent } from "./components/createElements/input";
+
+import { createAppComponent } from "./app";
 
 // let itemProperty = {
 //   id: "x",
@@ -26,10 +25,6 @@ fetch(getRequest)
     loadCards(source);
   });
 
-console.log(discount);
-console.log(discount2);
-const root = document.querySelector(".root");
-
 function loadCards(cardDataList) {
   cardDataList.forEach((data) => {
     const item = createCardItemComponent(data);
@@ -37,19 +32,12 @@ function loadCards(cardDataList) {
   });
 }
 
+const appComponent = createAppComponent();
+
 // root.append(createCardItemComponent(itemProperty));
 
-// const input = createInputComponent({ placeholder: "ewwadas" });
 // const image = document.createElement("img");
 // image.src = new URL("../assets/icons/basket.svg", import.meta.url);
-// import svgBasket from "bundle-text:../assets/icons/basket.svg";
-// const svgi = document.createElement("div");
-// svgi.innerHTML = svgBasket;
-// svgi.style.stroke = "red";
-// svgi.style.background = "blue";
-// svgi.style.background = "blue";
-// svgi.setAttribute("fill", "orange");
-// root.append(svgi);
 // // root.append(image);
 
 // let path = document.querySelector("path");
