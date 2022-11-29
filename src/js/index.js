@@ -12,7 +12,7 @@ import { createAppComponent } from "./app";
 //   alt: "x",
 // };
 
-const url = "https://637e6ac15b1cc8d6f92d8fb8.mockapi.io/card";
+const url = "https://fakestoreapi.com/products";
 const getOptions = { method: "GET" };
 
 const getRequest = new Request(url, getOptions);
@@ -33,13 +33,3 @@ function loadCards(cardDataList) {
 }
 
 const appComponent = createAppComponent();
-
-// root.append(createCardItemComponent(itemProperty));
-
-// const image = document.createElement("img");
-// image.src = new URL("../assets/icons/basket.svg", import.meta.url);
-// // root.append(image);
-
-// let path = document.querySelector("path");
-// path.removeAttribute("fill");
-// console.log(path);

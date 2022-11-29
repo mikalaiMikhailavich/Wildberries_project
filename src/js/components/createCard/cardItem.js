@@ -8,14 +8,22 @@ import {
 } from "../createElements/index";
 
 export const createCardItemComponent = (data) => {
-  const { id, name, inBasket, imageUrl, alt, discount, priceValue } = data;
+  const {
+    id,
+    title,
+    inBasket,
+    image,
+    alt,
+    price,
+    rating: { rate },
+  } = data;
   const card = createContainerComponent({
     id,
     className: inBasket ? "card card__inBasket" : "card",
   });
 
-  const image = createImageComponent({
-    src: imageUrl,
+  const imageCard = createImageComponent({
+    src: image,
     alt: alt,
     className: "image card__image",
   });
@@ -26,7 +34,7 @@ export const createCardItemComponent = (data) => {
   });
 
   const discountValue = renderElement("div", {
-    innerHTML: `${discount} % `,
+    innerHTML: `${rate} % `,
     className: "card__discount",
   });
 
@@ -41,26 +49,26 @@ export const createCardItemComponent = (data) => {
   });
 
   const priceDiscount = renderElement("div", {
-    innerHTML: `${(priceValue - priceValue * discount * 0, 01)}`,
+    innerHTML: `${(price - price * rate * 0, 01)}`,
     className: "card__price",
   });
 
-  const price = renderElement("div", {
-    innerHTML: priceValue,
+  const priceElement = renderElement("div", {
+    innerHTML: price,
     className: "card__price card__price_crossed-out",
   });
 
   const priceDiscountAndPriceContainer = createContainerComponent({
     className: "card__price-and-price-discount-container",
-    children: [priceDiscount, price],
+    children: [priceDiscount, priceElement],
   });
 
   const cardName = renderElement("div", {
-    innerHTML: name,
+    innerHTML: title,
   });
 
   card.append(
-    image,
+    imageCard,
     buttonOpenCard,
     discountValueAndButtonToBasketContainer,
     priceDiscountAndPriceContainer,
