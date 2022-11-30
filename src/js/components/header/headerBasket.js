@@ -6,13 +6,10 @@ import { createContainerComponent } from "../createElements";
 export function addBasketItem(data) {
   const { title } = data;
   const itemTitle = renderElement("div", { innerHTML: title });
-  console.log(itemTitle);
-  const element = createContainerComponent({
-    className: "",
-    children: [itemTitle],
-  });
-  basketItemContainer.append(element);
-  return element;
+  // console.log(itemTitle);
+
+  basketItemContainer.append(itemTitle);
+  // return element;
 }
 
 // addBasketItem()
@@ -77,4 +74,5 @@ export const basket = createContainerComponent({
 //     elem.value = "sadsa";
 //   }
 // });
+addBasketItem({ title: "sdasdaf" });
 addBasketItem({ title: "sdasdaf" });
