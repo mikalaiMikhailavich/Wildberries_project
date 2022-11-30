@@ -2,10 +2,9 @@ import {
   renderElement,
   createButtonElement,
   createImageComponent,
-  createCheckboxComponent,
   createContainerComponent,
-  createTextboxComponent,
 } from "../createElements/index";
+import { shoppingContainer } from "./shopping";
 
 export const createCardItemComponent = (data) => {
   const {
@@ -74,5 +73,6 @@ export const createCardItemComponent = (data) => {
     priceDiscountAndPriceContainer,
     cardName
   );
+  shoppingContainer.append(card);
   return card;
 };

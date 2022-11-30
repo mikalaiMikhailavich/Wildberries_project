@@ -1,11 +1,11 @@
 import { createContainerComponent } from "../createElements";
 import { headerLogoContainer } from "./headerLogo";
 import { filterCards } from "../searchForm";
-import { basket } from "./headerBasket";
+import { cart } from "./headerCart";
 
 const headerContainer = createContainerComponent({
   className: "container header__container",
-  children: [headerLogoContainer, filterCards, basket],
+  children: [headerLogoContainer, filterCards, cart],
 });
 
 export const header = createContainerComponent({

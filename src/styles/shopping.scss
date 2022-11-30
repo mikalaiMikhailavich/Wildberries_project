@@ -1,0 +1,11 @@
+.shopping {
+  &__container {
+    display: flex;
+    flex-wrap: wrap;
+  }
+}
+
+.card {
+  width: calc(100% / 12 * 1.714 - 32px);
+  margin: 0 16px 32px;
+}

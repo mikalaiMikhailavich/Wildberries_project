@@ -1,4 +1,4 @@
-import { createCardItemComponent } from "./components/createCard/cardItem";
+import { createCardItemComponent } from "./components/shopping/cardItem";
 
 import { createAppComponent } from "./app";
 
@@ -28,7 +28,6 @@ fetch(getRequest)
 function loadCards(cardDataList) {
   cardDataList.forEach((data) => {
     const item = createCardItemComponent(data);
-    root.append(item);
   });
 }
 
