@@ -74,6 +74,5 @@ export const createCardItemComponent = (data) => {
     priceDiscountAndPriceContainer,
     cardName
   );
-  console.log(card);
   return card;
 };

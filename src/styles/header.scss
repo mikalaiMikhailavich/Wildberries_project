@@ -3,6 +3,7 @@
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
+  height: 70px;
   &__container {
     display: flex;
     position: relative;
@@ -17,14 +18,24 @@
 
   &__dropdown {
     background-color: white;
-    display: none;
-    position: absolute;
-    top: 70%;
-    left: 100%;
-    transform: translateX(-100%);
+    // display: none;
+    // position: absolute;
+    // top: 70%;
+    // left: 100%;
+    // transform: translateX(-100%);
   }
 
-  &__dropdown-container {
+  &__basket {
     display: flex;
+    flex-direction: column;
+  }
+  &__basket-icon {
+    width: 45px;
+    align-self: flex-end;
+  }
+
+  &__basket-header {
+    display: flex;
+    justify-content: space-between;
   }
 }

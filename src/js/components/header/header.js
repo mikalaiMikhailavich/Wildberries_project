@@ -1,12 +1,11 @@
 import { createContainerComponent } from "../createElements";
 import { headerLogoContainer } from "./headerLogo";
 import { filterCards } from "../searchForm";
-import { basketIcon } from "./headerBasket";
-import { dropDown } from "./dropdownBasket";
+import { basket } from "./headerBasket";
 
 const headerContainer = createContainerComponent({
   className: "container header__container",
-  children: [headerLogoContainer, filterCards, basketIcon, dropDown],
+  children: [headerLogoContainer, filterCards, basket],
 });
 
 export const header = createContainerComponent({
@@ -14,11 +13,3 @@ export const header = createContainerComponent({
   className: "header",
   children: [headerContainer],
 });
-
-basketIcon.addEventListener("mouseover", () =>
-  dropDown.classList.add("displayOn")
-);
-
-basketIcon.addEventListener("mouseout", () =>
-  dropDown.classList.remove("displayOn")
-);
