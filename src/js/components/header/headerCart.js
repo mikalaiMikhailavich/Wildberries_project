@@ -37,7 +37,7 @@ export const cartItemContainer = createContainerComponent({
   className: "cart__item-container",
 });
 
-const cartContainer = createContainerComponent({
+export const cartContainer = createContainerComponent({
   className: "cart__container",
   children: [cartHeader, cartItemContainer, cartFooter],
 });
@@ -47,10 +47,12 @@ const cartIcon = document.createElement("div");
 cartIcon.innerHTML = svgcart;
 cartIcon.className = "cart__icon";
 
+const headerCounter = renderElement("div");
+headerCounter.innerHTML = 0;
 // котнейнер иконки
 const cartIconInner = createContainerComponent({
   className: "cart__icon-container",
-  children: [cartIcon],
+  children: [cartIcon, headerCounter],
 });
 //
 
@@ -65,9 +67,10 @@ export const cart = createContainerComponent({
 // cartIcon.setAttribute("fill", "orange");
 
 export function addcartItem(data) {
-  const { title, price } = data;
+  const { title, price, id, count } = data;
 
   const elem = renderElement("div", { className: "cart__item" });
+  elem.dataset.name = id;
 
   const itemTitle = renderElement("h4", {
     innerHTML: title,
@@ -83,7 +86,7 @@ export function addcartItem(data) {
 
   const cartCount = renderElement("div", {
     className: "cart__count",
-    innerHTML: "0",
+    innerHTML: count,
   });
 
   const cartCountIncrease = createButtonElement({
@@ -105,3 +108,7 @@ export function addcartItem(data) {
   cartItemContainer.append(elem);
   return elem;
 }
+
+cartIconInner.addEventListener("click", () =>
+  cartContainer.classList.toggle("hide")
+);

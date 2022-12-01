@@ -1,84 +1,76 @@
+import { createDataProvider } from "../js/services/data";
 import { createCardItemComponent } from "./components/shopping/cardItem";
-
 import { createAppComponent } from "./app";
 import { addcartItem, cartItemContainer } from "./components/header/headerCart";
-// let itemProperty = {
-//   id: "x",
-//   imageUrl: "http://loremflickr.com/640/480/cats",
-//   inBasket: false,
-//   discount: 10,
-//   priceValue: 1000,
-//   name: "x",
-//   alt: "x",
-// };
+import { filterCards } from "./components/header/searchForm";
+import { shoppingContainer } from "./components/shopping/shopping";
 
 const url = "https://fakestoreapi.com/products";
 const getOptions = { method: "GET" };
-
 const getRequest = new Request(url, getOptions);
 
-export let cartArray = [];
-let source = [];
+const sourceDataprovider = createDataProvider();
+const cardDataprovider = createDataProvider();
 
-export const dataProvider = {
-  add: function (id) {
-    // let todo = {
-    //   id: Date.now(),
-    //   isChecked: false,
-    //   text: name,
-    //   date: new Date().toLocaleString(),
-    // };
-    array = source.find((elem) => elem.id == id);
-    cartArray.push(array);
-  },
-  clear: function () {
-    cartArray = [];
-  },
-  read: function () {
-    return [...arrayOfTodoTasks];
-  },
-  deleteLast: function () {
-    arrayOfTodoTasks.pop();
-  },
-  delete: function (index) {
-    arrayOfTodoTasks.splice(index, 1);
-  },
-  update: function (index, todo) {
-    arrayOfTodoTasks[index] = todo;
-  },
-};
+// createAppComponent();
 
-fetch(getRequest)
-  .then((response) => response.json())
-  .then((data) => {
-    data.forEach((data) => source.push(data));
-    loadCards(source);
-  });
+function getFromAPI() {
+  fetch(getRequest)
+    .then((response) => response.json())
+    .then((data) => {
+      data.forEach((item) => sourceDataprovider.add(item));
+      loadCards(sourceDataprovider.read());
+    });
+}
 
 function loadCards(cardDataList) {
   cardDataList.forEach((data) => {
-    const item = createCardItemComponent(data);
+    createCardItemComponent(data);
   });
 }
+getFromAPI();
 
 document.body.addEventListener("click", (e) => {
   const target = e.target;
   const card = target.closest(".card");
   const id = card?.id;
-  console.log(id);
-  if (id && target.classList.contains("button")) {
-    const clickId = source.find((elem) => elem.id == id);
-    cartArray.push(clickId);
-    console.log(cartArray);
-    // console.log(array);
+  if (target.classList.contains("button__to-card")) {
+    const item = sourceDataprovider.getElement(id);
+    if (!item) {
+      return;
+    }
     cartItemContainer.innerHTML = null;
-
-    cartArray.forEach((elem) => {
+    cardDataprovider.add(item);
+    const cardResults = cardDataprovider.read();
+    const count = cardResults.map((value, index) => ({
+      ...value,
+      count: cardResults.filter((cr) => cr.id == value.id).length,
+    }));
+    console.log(count);
+    count.forEach((elem) => {
       addcartItem(elem);
     });
   }
 });
-createAppComponent();
+
+document.body.addEventListener("click", (e) => {
+  const target = e.target;
+  if (target.classList.contains("cart__clear-button")) {
+    cardDataprovider.clear();
+    cartItemContainer.innerHTML = null;
+  }
+});
+
+function searchTodoCards(searchQuery) {
+  let searchResults = sourceDataprovider
+    .read()
+    .filter((card) =>
+      card.title.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+  shoppingContainer.innerHTML = null;
+  searchResults.forEach((card) => createCardItemComponent(card));
+}
+filterCards.addEventListener("keyup", () => searchTodoCards(filterCards.value));
 
 function sameId(array) {
   const countItems = {};
@@ -87,14 +79,12 @@ function sameId(array) {
     countItems[item.id] = countItems[item.id] ? countItems[item.id] + 1 : 1;
   }
   console.log(countItems);
-  // обрабатываем ключи объекта, отфильтровываем все, что меньше 1
-  const result = Object.keys(countItems).filter((item) => countItems[item] > 1);
+
+  console.log(Object.keys(countItems));
+  const result = Object.keys(countItems).filter(
+    (item) => countItems[item] >= 1
+  );
   console.log(result);
 }
 
-sameId([{ id: 2 }, { id: 1 }, { id: 1 }, { id: 1 }, { id: 2 }]);
-
-// dataProvider.clear(cartArray);
-// cartArray.forEach((elem) => {
-//   addcartItem(elem);
-// });
+sameId([{ id: 2 }, { id: 1 }, { id: 1 }, { id: 1 }, { id: 4 }, { id: 4 }]);

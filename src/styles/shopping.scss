@@ -3,6 +3,7 @@
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
+    justify-content: center;
   }
 }
 
@@ -11,6 +12,7 @@
   padding: 20px;
   box-sizing: border-box;
   flex: 1 0 250px;
+  // width: calc(100% / 12 * 2 - 32px);
   // max-width: 300px;
   // min-width: 200px;
   // width: 250px;

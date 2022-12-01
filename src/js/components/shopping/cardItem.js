@@ -38,7 +38,7 @@ export const createCardItemComponent = (data) => {
   });
 
   const buttonToBasket = createButtonElement({
-    className: inBasket ? "button button__inBasket" : "button",
+    className: inBasket ? "button button__inBasket" : "button button__to-card",
     value: inBasket ? "В корзине" : "Добавить в корзину",
   });
 

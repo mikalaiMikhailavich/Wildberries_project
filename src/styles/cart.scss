@@ -55,10 +55,13 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    width: 160px;
   }
   &__item {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    gap: 15px;
   }
 }
 

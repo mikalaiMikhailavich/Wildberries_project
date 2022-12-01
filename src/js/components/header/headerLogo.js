@@ -1,6 +1,7 @@
 import {
   createImageComponent,
   createContainerComponent,
+  renderElement,
 } from "../createElements/index";
 
 const headerLogo = createImageComponent({
@@ -9,7 +10,7 @@ const headerLogo = createImageComponent({
 });
 
 headerLogo.src = new URL(
-  "../../../assets/img/wb_logo_bf_2022_r.png",
+  "../../../assets/icons/wildberries-logo.svg",
   import.meta.url
 );
 
