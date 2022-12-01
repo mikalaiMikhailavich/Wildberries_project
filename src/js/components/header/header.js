@@ -1,6 +1,6 @@
 import { createContainerComponent } from "../createElements";
 import { headerLogoContainer } from "./headerLogo";
-import { filterCards } from "../searchForm";
+import { filterCards } from "./searchForm";
 import { cart } from "./headerCart";
 
 const headerContainer = createContainerComponent({

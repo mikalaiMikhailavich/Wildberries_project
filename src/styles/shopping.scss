@@ -2,10 +2,20 @@
   &__container {
     display: flex;
     flex-wrap: wrap;
+    gap: 10px;
   }
 }
 
 .card {
-  width: calc(100% / 12 * 1.714 - 32px);
-  margin: 0 16px 32px;
+  // width: calc(100% / 12 * 1.714 - 32px);
+  padding: 20px;
+  box-sizing: border-box;
+  flex: 1 0 250px;
+  // max-width: 300px;
+  // min-width: 200px;
+  // width: 250px;
+}
+
+.card__image {
+  height: 140px;
 }

@@ -3,67 +3,59 @@ import { renderElement } from "../createElements/index";
 import { createButtonElement } from "../createElements/index";
 import { createContainerComponent } from "../createElements";
 
-const cartItemContainer = createContainerComponent({
-  className: "header__cart-item-container",
-});
-
-//
 //cart-header
-const buttonClearItemscart = createButtonElement({
-  className: "button header__dropdown-button",
+const buttonClearItemsCart = createButtonElement({
+  className: "button cart__clear-button",
   value: "Очистить корзину",
 });
 
 const cartTitle = renderElement("h3", {
-  className: "header__cart-title",
+  className: "cart__title",
   innerHTML: "Корзина",
 });
 
 const cartHeader = createContainerComponent({
-  className: "header__cart-header",
-  children: [cartTitle, buttonClearItemscart],
+  className: "cart__header",
+  children: [cartTitle, buttonClearItemsCart],
 });
 
+// Footer
 const totalPriceText = renderElement("h4", {
-  className: "cart-item-price-text",
+  className: "cart__item-price-text",
   innerHTML: "Итого:",
 });
 const totalPrice = renderElement("h4", {
-  className: "cart-item-total-price",
+  className: "cart__item-total-price",
   innerHTML: "x",
 });
 const cartFooter = createContainerComponent({
-  className: "header__cart-footer",
+  className: "cart__footer",
   children: [totalPriceText, totalPrice],
 });
 
+export const cartItemContainer = createContainerComponent({
+  className: "cart__item-container",
+});
+
 const cartContainer = createContainerComponent({
-  className: "header__cart-container",
+  className: "cart__container",
   children: [cartHeader, cartItemContainer, cartFooter],
 });
-//
-
-// const cartInner = createContainerComponent({
-//   className: "header__cart-content",
-//   children: [cartContainer],
-// });
-
-//
 
 // иконка корзины
 const cartIcon = document.createElement("div");
 cartIcon.innerHTML = svgcart;
-cartIcon.className = "cart-icon";
+cartIcon.className = "cart__icon";
 
 // котнейнер иконки
 const cartIconInner = createContainerComponent({
-  className: "header__cart-icon",
+  className: "cart__icon-container",
   children: [cartIcon],
 });
 //
 
 export const cart = createContainerComponent({
-  className: "header__cart",
+  className: "cart header__cart",
   children: [cartIconInner, cartContainer],
 });
 
@@ -72,33 +64,44 @@ export const cart = createContainerComponent({
 // cartIcon.style.background = "blue";
 // cartIcon.setAttribute("fill", "orange");
 
-// document.body.addEventListener("click", (e) => {
-//   console.log(e.target);
-//   const elem = buttonClearItemscart;
-//   if (e.target.classList.contains("button")) {
-//     elem.value = "sadsa";
-//   }
-// });
-addcartItem({
-  title: "sdasa s d f a  s f  d a   f      s   d  a s",
-  price: "$",
-});
-addcartItem({
-  title: "sdasa s d f a  s f  d a   f      s   d  a s",
-  price: "$",
-});
-
 export function addcartItem(data) {
   const { title, price } = data;
-  const elem = renderElement("div", { className: "cart-item" });
+
+  const elem = renderElement("div", { className: "cart__item" });
+
   const itemTitle = renderElement("h4", {
     innerHTML: title,
-    className: "cart-title",
+    className: "cart__item-title",
   });
 
   const itemPrice = renderElement("h4", { innerHTML: price });
-  elem.append(itemTitle, itemPrice);
 
+  const cartCountDecrease = createButtonElement({
+    className: "cart__button-decrease",
+    value: "-",
+  });
+
+  const cartCount = renderElement("div", {
+    className: "cart__count",
+    innerHTML: "0",
+  });
+
+  const cartCountIncrease = createButtonElement({
+    className: "cart__button-increase",
+    value: "+",
+  });
+
+  const cartCountContainer = createContainerComponent({
+    className: "cart__count",
+    children: [cartCountDecrease, cartCount, cartCountIncrease],
+  });
+
+  const itemDelete = createButtonElement({
+    className: "cart__button-delete",
+    value: "x",
+  });
+
+  elem.append(itemTitle, itemPrice, cartCountContainer, itemDelete);
   cartItemContainer.append(elem);
-  // return element;
+  return elem;
 }

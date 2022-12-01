@@ -48,7 +48,7 @@ export const createCardItemComponent = (data) => {
   });
 
   const priceDiscount = renderElement("div", {
-    innerHTML: `${(price - price * rate * 0, 01)}`,
+    innerHTML: `${Math.trunc(price - price * rate * 0.01)}`,
     className: "card__price",
   });
 

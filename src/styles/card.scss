@@ -2,7 +2,7 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  width: 300px;
+  // width: 300px;
   border: 1px solid $main-color;
   border-radius: 15px;
 
@@ -11,13 +11,13 @@
     max-height: 220px;
   }
   &__discount-and-button-container {
-    position: absolute;
+    // position: absolute;
     display: flex;
     justify-content: space-between;
-    width: 80%;
-    bottom: 65px;
-    left: 50%;
-    transform: translateX(-50%);
+    // width: 80%;
+    // bottom: 65px;
+    // left: 50%;
+    // transform: translateX(-50%);
   }
 
   &__price-and-price-discount-container {
@@ -32,7 +32,6 @@
 }
 
 .button {
-  width: 180px;
   &__modal {
     position: absolute;
     left: 50%;
@@ -41,9 +40,4 @@
     opacity: 0;
     transition: all 0.3s;
   }
-}
-
-.image {
-  width: 100%;
-  display: block;
 }

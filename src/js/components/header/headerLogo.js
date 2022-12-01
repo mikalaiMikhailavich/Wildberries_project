@@ -17,6 +17,3 @@ export const headerLogoContainer = createContainerComponent({
   className: "header__logo-container",
   children: [headerLogo],
 });
-
-// const image = document.createElement("img");
-// image.src = new URL("../assets/icons/basket.svg", import.meta.url);

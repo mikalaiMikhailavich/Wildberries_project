@@ -1,5 +1,6 @@
 @import "variables";
 @import "card";
+@import "cart";
 @import "header";
 @import "shopping";
 
@@ -31,6 +32,10 @@ p {
   margin: 0 auto;
 }
 
-.displayOn {
+.display-on {
   display: block;
+}
+
+.image {
+  width: 100%;
 }
