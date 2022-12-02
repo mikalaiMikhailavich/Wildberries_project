@@ -61,17 +61,6 @@ document.body.addEventListener("click", (e) => {
   }
 });
 
-function searchTodoCards(searchQuery) {
-  let searchResults = sourceDataprovider
-    .read()
-    .filter((card) =>
-      card.title.toLowerCase().includes(searchQuery.toLowerCase())
-    );
-  shoppingContainer.innerHTML = null;
-  searchResults.forEach((card) => createCardItemComponent(card));
-}
-filterCards.addEventListener("keyup", () => searchTodoCards(filterCards.value));
-
 // function sameId(array) {
 //   const countItems = {};
 //   for (const item of array) {
