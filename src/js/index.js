@@ -1,5 +1,8 @@
-import { createDataProvider } from "../js/services/data";
-import { createCardItemComponent } from "./components/shopping/cardItem";
+import { sourceDataprovider, cardDataprovider } from "../js/services/data";
+import {
+  createCardItemComponent,
+  createModalCardItemComponent,
+} from "./components/shopping/cardItem";
 import { createAppComponent } from "./app";
 import { addcartItem, cartItemContainer } from "./components/header/headerCart";
 import { filterCards } from "./components/header/searchForm";
@@ -8,9 +11,6 @@ import { shoppingContainer } from "./components/shopping/shopping";
 const url = "https://fakestoreapi.com/products";
 const getOptions = { method: "GET" };
 const getRequest = new Request(url, getOptions);
-
-const sourceDataprovider = createDataProvider();
-const cardDataprovider = createDataProvider();
 
 // createAppComponent();
 
@@ -72,19 +72,43 @@ function searchTodoCards(searchQuery) {
 }
 filterCards.addEventListener("keyup", () => searchTodoCards(filterCards.value));
 
-function sameId(array) {
-  const countItems = {};
-  for (const item of array) {
+// function sameId(array) {
+//   const countItems = {};
+//   for (const item of array) {
+//     console.log(item);
+//     countItems[item.id] = countItems[item.id] ? countItems[item.id] + 1 : 1;
+//   }
+//   console.log(countItems);
+
+//   console.log(Object.keys(countItems));
+//   const result = Object.keys(countItems).filter(
+//     (item) => countItems[item] >= 1
+//   );
+//   console.log(result);
+// }
+
+// sameId([{ id: 2 }, { id: 1 }, { id: 1 }, { id: 1 }, { id: 4 }, { id: 4 }]);
+
+document.body.addEventListener("click", (e) => {
+  const target = e.target;
+  const card = target.closest(".card");
+  const id = card?.id;
+  if (target.classList.contains("button__modal")) {
+    const item = sourceDataprovider.getElement(id);
+    if (!item) {
+      return;
+    }
+    createModalCardItemComponent(item);
     console.log(item);
-    countItems[item.id] = countItems[item.id] ? countItems[item.id] + 1 : 1;
   }
-  console.log(countItems);
+});
 
-  console.log(Object.keys(countItems));
-  const result = Object.keys(countItems).filter(
-    (item) => countItems[item] >= 1
-  );
-  console.log(result);
-}
-
-sameId([{ id: 2 }, { id: 1 }, { id: 1 }, { id: 1 }, { id: 4 }, { id: 4 }]);
+document.body.addEventListener("click", (e) => {
+  const target = e.target;
+  const card = target.closest(".card");
+  if (target.classList.contains("close-modal")) {
+    const mod = document.querySelector(".modal-win");
+    console.log(mod);
+    mod.remove();
+  }
+});

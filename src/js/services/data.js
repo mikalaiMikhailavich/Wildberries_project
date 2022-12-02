@@ -1,4 +1,4 @@
-export function createDataProvider() {
+function createDataProvider() {
   let source = [];
   return {
     add: function (element) {
@@ -21,3 +21,6 @@ export function createDataProvider() {
     },
   };
 }
+
+export const sourceDataprovider = createDataProvider();
+export const cardDataprovider = createDataProvider();
