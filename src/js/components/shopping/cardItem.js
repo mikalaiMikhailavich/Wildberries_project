@@ -1,3 +1,4 @@
+import { sourceDataprovider } from "../../services/data";
 import {
   renderElement,
   createButtonElement,
@@ -153,3 +154,27 @@ export const createModalCardItemComponent = (data) => {
   modal.append(card);
   return card;
 };
+
+document.body.addEventListener("click", (e) => {
+  const target = e.target;
+  const card = target.closest(".card");
+  const id = card?.id;
+  if (target.classList.contains("button__modal")) {
+    const item = sourceDataprovider.getElement(id);
+    if (!item) {
+      return;
+    }
+    createModalCardItemComponent(item);
+    console.log(item);
+  }
+});
+
+document.body.addEventListener("click", (e) => {
+  const target = e.target;
+  const card = target.closest(".card");
+  if (target.classList.contains("close-modal")) {
+    const mod = document.querySelector(".modal-win");
+    console.log(mod);
+    mod.remove();
+  }
+});

@@ -42,7 +42,7 @@ document.body.addEventListener("click", (e) => {
     cartItemContainer.innerHTML = null;
     cardDataprovider.add(item);
     const cardResults = cardDataprovider.read();
-    const count = cardResults.map((value, index) => ({
+    const count = cardResults.map((value) => ({
       ...value,
       count: cardResults.filter((cr) => cr.id == value.id).length,
     }));
@@ -88,27 +88,3 @@ filterCards.addEventListener("keyup", () => searchTodoCards(filterCards.value));
 // }
 
 // sameId([{ id: 2 }, { id: 1 }, { id: 1 }, { id: 1 }, { id: 4 }, { id: 4 }]);
-
-document.body.addEventListener("click", (e) => {
-  const target = e.target;
-  const card = target.closest(".card");
-  const id = card?.id;
-  if (target.classList.contains("button__modal")) {
-    const item = sourceDataprovider.getElement(id);
-    if (!item) {
-      return;
-    }
-    createModalCardItemComponent(item);
-    console.log(item);
-  }
-});
-
-document.body.addEventListener("click", (e) => {
-  const target = e.target;
-  const card = target.closest(".card");
-  if (target.classList.contains("close-modal")) {
-    const mod = document.querySelector(".modal-win");
-    console.log(mod);
-    mod.remove();
-  }
-});
