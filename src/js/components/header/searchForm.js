@@ -7,7 +7,7 @@ import { shoppingContainer } from "../shopping/shopping";
 export const filterCards = createInputComponent({
   className: "header__search",
   placeholder: "Поиск...",
-  // onChange: () => searchTodoCards(filterCards.value),
+  onChange: () => searchTodoCards(filterCards.value),
 });
 
 function searchTodoCards(searchQuery) {
@@ -19,4 +19,3 @@ function searchTodoCards(searchQuery) {
   shoppingContainer.innerHTML = null;
   searchResults.forEach((card) => createCardItemComponent(card));
 }
-filterCards.addEventListener("keyup", () => searchTodoCards(filterCards.value));
