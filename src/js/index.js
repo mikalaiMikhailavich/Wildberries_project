@@ -1,12 +1,12 @@
 import { sourceDataprovider, cardDataprovider } from "../js/services/data";
-import {
-  createCardItemComponent,
-  createModalCardItemComponent,
-} from "./components/shopping/cardItem";
+import { createCardItemComponent } from "./components/shopping/cardItem";
 import { createAppComponent } from "./app";
-import { addcartItem, cartItemContainer } from "./components/header/headerCart";
-import { filterCards } from "./components/header/searchForm";
-import { shoppingContainer } from "./components/shopping/shopping";
+import {
+  addcartItem,
+  cartItemContainer,
+  headerCounter,
+  totalPrice,
+} from "./components/header/headerCart";
 
 const url = "https://fakestoreapi.com/products";
 const getOptions = { method: "GET" };
@@ -34,22 +34,29 @@ document.body.addEventListener("click", (e) => {
   const target = e.target;
   const card = target.closest(".card");
   const id = card?.id;
-  if (target.classList.contains("button__to-card")) {
+
+  if (target.classList.contains("button__to-cart")) {
     const item = sourceDataprovider.getElement(id);
-    if (!item) {
-      return;
-    }
+    console.log(item);
     cartItemContainer.innerHTML = null;
     cardDataprovider.add(item);
+
+    let a = document.querySelectorAll(".card");
+    console.log(a);
     const cardResults = cardDataprovider.read();
     const count = cardResults.map((value) => ({
       ...value,
       count: cardResults.filter((cr) => cr.id == value.id).length,
     }));
     console.log(count);
+    target.disabled = true;
+    console.log(self);
     count.forEach((elem) => {
       addcartItem(elem);
     });
+
+    headerCounter.innerHTML = cardDataprovider.updateMainCounter();
+    fullPrice.innerHTML = Math.trunc(cardDataprovider.updateFullPrice());
   }
 });
 
@@ -58,8 +65,13 @@ document.body.addEventListener("click", (e) => {
   if (target.classList.contains("cart__clear-button")) {
     cardDataprovider.clear();
     cartItemContainer.innerHTML = null;
+    headerCounter.innerHTML = cardDataprovider.updateMainCounter();
+
+    totalPrice.innerHTML = cardDataprovider.updateFullPrice();
   }
 });
+
+let fullPrice = document.querySelector(".cart__item-total-price");
 
 // function sameId(array) {
 //   const countItems = {};

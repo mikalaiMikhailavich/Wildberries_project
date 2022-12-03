@@ -2,15 +2,14 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  // width: 300px;
-  border: 1px solid $main-color;
   border-radius: 15px;
   max-width: 250px;
 
   &__image {
     border-radius: 15px;
-    max-height: 220px;
+    height: 175px;
   }
+
   &__discount-and-button-container {
     // position: absolute;
     display: flex;
@@ -29,6 +28,18 @@
 
   &:hover .button__modal {
     opacity: 1;
+  }
+  &__title {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
+  &__price {
+  }
+
+  &__price_crossed-out {
+    text-decoration: line-through;
   }
 }
 

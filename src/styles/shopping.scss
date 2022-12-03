@@ -1,5 +1,6 @@
 .shopping {
   &__container {
+    margin-top: 50px !important;
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
@@ -16,8 +17,4 @@
   // max-width: 300px;
   // min-width: 200px;
   // width: 250px;
-}
-
-.card__image {
-  height: 140px;
 }

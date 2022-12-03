@@ -5,6 +5,7 @@ import {
   createImageComponent,
   createContainerComponent,
 } from "../createElements/index";
+import { cartContainer } from "../header/headerCart";
 import { modal, shoppingContainer } from "./shopping";
 
 export const createCardItemComponent = (data) => {
@@ -39,8 +40,8 @@ export const createCardItemComponent = (data) => {
   });
 
   const buttonToBasket = createButtonElement({
-    className: inBasket ? "button button__inBasket" : "button button__to-card",
-    value: inBasket ? "В корзине" : "Добавить в корзину",
+    className: "button button__to-cart",
+    value: "Добавить в корзину",
   });
 
   const discountValueAndButtonToBasketContainer = createContainerComponent({
@@ -64,6 +65,7 @@ export const createCardItemComponent = (data) => {
   });
 
   const cardName = renderElement("div", {
+    className: "card__title",
     innerHTML: title,
   });
 
@@ -161,17 +163,13 @@ document.body.addEventListener("click", (e) => {
   const id = card?.id;
   if (target.classList.contains("button__modal")) {
     const item = sourceDataprovider.getElement(id);
-    if (!item) {
-      return;
-    }
     createModalCardItemComponent(item);
-    console.log(item);
+    cartContainer.classList.add("hide");
   }
 });
 
 document.body.addEventListener("click", (e) => {
   const target = e.target;
-  const card = target.closest(".card");
   if (target.classList.contains("close-modal")) {
     const mod = document.querySelector(".modal-win");
     console.log(mod);

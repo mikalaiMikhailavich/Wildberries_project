@@ -19,8 +19,18 @@ function createDataProvider() {
     create: function () {
       source = [];
     },
+    updateFullPrice: function () {
+      fullPrice = [...source].reduce((acc, item) => {
+        return item.price + acc;
+      }, 0);
+      return fullPrice;
+    },
+    updateMainCounter: function () {
+      return [...source].length;
+    },
   };
 }
-
 export const sourceDataprovider = createDataProvider();
 export const cardDataprovider = createDataProvider();
+
+console.log(cardDataprovider.updateMainCounter());

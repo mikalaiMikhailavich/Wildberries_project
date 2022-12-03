@@ -2,6 +2,7 @@ import svgcart from "bundle-text:../../../assets/icons/cart.svg";
 import { renderElement } from "../createElements/index";
 import { createButtonElement } from "../createElements/index";
 import { createContainerComponent } from "../createElements";
+import { cardDataprovider } from "../../services/data";
 
 //cart-header
 const buttonClearItemsCart = createButtonElement({
@@ -24,10 +25,11 @@ const totalPriceText = renderElement("h4", {
   className: "cart__item-price-text",
   innerHTML: "Итого:",
 });
-const totalPrice = renderElement("h4", {
+export const totalPrice = renderElement("h4", {
   className: "cart__item-total-price",
-  innerHTML: "x",
+  innerHTML: "0",
 });
+
 const cartFooter = createContainerComponent({
   className: "cart__footer",
   children: [totalPriceText, totalPrice],
@@ -47,7 +49,7 @@ const cartIcon = document.createElement("div");
 cartIcon.innerHTML = svgcart;
 cartIcon.className = "cart__icon";
 
-const headerCounter = renderElement("div");
+export const headerCounter = renderElement("div");
 headerCounter.innerHTML = 0;
 // котнейнер иконки
 const cartIconInner = createContainerComponent({
@@ -67,18 +69,26 @@ export const cart = createContainerComponent({
 // cartIcon.setAttribute("fill", "orange");
 
 export function addcartItem(data) {
-  const { title, price, id, count } = data;
+  const {
+    title,
+    price,
+    id,
+    count,
+    rating: { rate },
+  } = data;
 
   const elem = renderElement("div", { className: "cart__item" });
-  elem.dataset.name = id;
+  elem.dataset.id = id;
 
   const itemTitle = renderElement("h4", {
     innerHTML: title,
     className: "cart__item-title",
   });
 
-  const itemPrice = renderElement("h4", { innerHTML: price });
-
+  const itemPrice = renderElement("h4", {
+    innerHTML: `${Math.trunc(price - price * rate * 0.01)}`,
+  });
+  console.log();
   const cartCountDecrease = createButtonElement({
     className: "cart__button-decrease",
     value: "-",
