@@ -24,6 +24,10 @@ function getFromAPI() {
   fetch(getRequest)
     .then((response) => response.json())
     .then((data) => {
+      data.map((elem) => {
+        const isInCart = cardDataprovider.getElement(elem.id) != null;
+        return { ...elem, disabled: isInCart };
+      });
       data.forEach((item) => sourceDataprovider.add(item));
       loadCards(sourceDataprovider.read());
       updateCounters();
@@ -31,35 +35,6 @@ function getFromAPI() {
 }
 
 getFromAPI();
-
-// document.body.addEventListener("click", (e) => {
-//   const target = e.target;
-//   const card = target.closest(".card");
-//   const id = card?.id;
-
-//   if (target.classList.contains("button__to-cart")) {
-//     const item = sourceDataprovider.getElement(id);
-//     item.disabled = true;
-//     cardDataprovider.add(item);
-//     console.log(cardDataprovider.read());
-//     // console.log(sourceDataprovider.read());
-//     // const cardResults = cardDataprovider.read();
-//     // const count = cardResults.map((value) => ({
-//     //   ...value,
-//     //   count: cardResults.filter((cr) => cr.id == value.id).length,
-//     //   disabledButton: (target.disabled = true),
-//     // }));
-//     cartItemContainer.innerHTML = null;
-//     cardDataprovider.read().forEach((elem) => {
-//       addcartItem(elem);
-//     });
-
-//     shoppingContainer.innerHTML = null;
-
-//     loadCards(sourceDataprovider.read());
-//     updateCounters();
-//   }
-// });
 
 buttonClearItemsCart.addEventListener("click", () => {
   cardDataprovider.clear();

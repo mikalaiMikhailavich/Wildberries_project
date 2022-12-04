@@ -55,31 +55,21 @@ export const createCardItemComponent = (data) => {
       const id = card?.id;
 
       if (target.classList.contains("button__to-cart")) {
-        const item = sourceDataprovider.getElement(id);
-        item.disabled = true;
-        cardDataprovider.add(item);
-        console.log(cardDataprovider.read());
-        // console.log(sourceDataprovider.read());
-        // const cardResults = cardDataprovider.read();
-        // const count = cardResults.map((value) => ({
-        //   ...value,
-        //   count: cardResults.filter((cr) => cr.id == value.id).length,
-        //   disabledButton: (target.disabled = true),
-        // }));
+        const card = sourceDataprovider.getElement(id);
+        card.disabled = true;
+        cardDataprovider.add(card);
         cartItemContainer.innerHTML = null;
         cardDataprovider.read().forEach((elem) => {
           addcartItem(elem);
         });
-
         shoppingContainer.innerHTML = null;
-
         loadCards(sourceDataprovider.read());
         updateCounters();
       }
     },
   });
-
-  buttonToBasket.disabled = disabled;
+  const inCart = cardDataprovider.getElement(id) != null;
+  buttonToBasket.disabled = disabled || inCart;
 
   console.log(buttonToBasket.disabled);
 
