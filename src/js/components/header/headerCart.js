@@ -5,7 +5,7 @@ import { createContainerComponent } from "../createElements";
 import { cardDataprovider } from "../../services/data";
 
 //cart-header
-const buttonClearItemsCart = createButtonElement({
+export const buttonClearItemsCart = createButtonElement({
   className: "button cart__clear-button",
   value: "Очистить корзину",
 });
@@ -25,6 +25,7 @@ const totalPriceText = renderElement("h4", {
   className: "cart__item-price-text",
   innerHTML: "Итого:",
 });
+
 export const totalPrice = renderElement("h4", {
   className: "cart__item-total-price",
   innerHTML: "0",
@@ -49,8 +50,11 @@ const cartIcon = document.createElement("div");
 cartIcon.innerHTML = svgcart;
 cartIcon.className = "cart__icon";
 
-export const headerCounter = renderElement("div");
-headerCounter.innerHTML = 0;
+export const headerCounter = renderElement("div", {
+  className: "cart__icon-counter",
+  innerHTML: `${cardDataprovider.updateMainCounter()}`,
+});
+console.log(cardDataprovider.updateMainCounter());
 // котнейнер иконки
 const cartIconInner = createContainerComponent({
   className: "cart__icon-container",
@@ -73,7 +77,7 @@ export function addcartItem(data) {
     title,
     price,
     id,
-    count,
+    // count,
     rating: { rate },
   } = data;
 
@@ -96,7 +100,7 @@ export function addcartItem(data) {
 
   const cartCount = renderElement("div", {
     className: "cart__count",
-    innerHTML: count,
+    // innerHTML: count,
   });
 
   const cartCountIncrease = createButtonElement({

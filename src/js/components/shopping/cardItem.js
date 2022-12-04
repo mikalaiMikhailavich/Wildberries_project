@@ -1,12 +1,18 @@
-import { sourceDataprovider } from "../../services/data";
+import { loadCards } from "../../services/dataApi";
+import { cardDataprovider, sourceDataprovider } from "../../services/data";
 import {
   renderElement,
   createButtonElement,
   createImageComponent,
   createContainerComponent,
 } from "../createElements/index";
-import { cartContainer } from "../header/headerCart";
+import {
+  addcartItem,
+  cartContainer,
+  cartItemContainer,
+} from "../header/headerCart";
 import { modal, shoppingContainer } from "./shopping";
+import { updateCounters } from "../../services/counter";
 
 export const createCardItemComponent = (data) => {
   const {
@@ -16,6 +22,7 @@ export const createCardItemComponent = (data) => {
     image,
     alt,
     price,
+    disabled,
     rating: { rate },
   } = data;
   const card = createContainerComponent({
@@ -42,7 +49,39 @@ export const createCardItemComponent = (data) => {
   const buttonToBasket = createButtonElement({
     className: "button button__to-cart",
     value: "Добавить в корзину",
+    onClick: (e) => {
+      const target = e.target;
+      const card = target.closest(".card");
+      const id = card?.id;
+
+      if (target.classList.contains("button__to-cart")) {
+        const item = sourceDataprovider.getElement(id);
+        item.disabled = true;
+        cardDataprovider.add(item);
+        console.log(cardDataprovider.read());
+        // console.log(sourceDataprovider.read());
+        // const cardResults = cardDataprovider.read();
+        // const count = cardResults.map((value) => ({
+        //   ...value,
+        //   count: cardResults.filter((cr) => cr.id == value.id).length,
+        //   disabledButton: (target.disabled = true),
+        // }));
+        cartItemContainer.innerHTML = null;
+        cardDataprovider.read().forEach((elem) => {
+          addcartItem(elem);
+        });
+
+        shoppingContainer.innerHTML = null;
+
+        loadCards(sourceDataprovider.read());
+        updateCounters();
+      }
+    },
   });
+
+  buttonToBasket.disabled = disabled;
+
+  console.log(buttonToBasket.disabled);
 
   const discountValueAndButtonToBasketContainer = createContainerComponent({
     className: "card__discount-and-button-container",

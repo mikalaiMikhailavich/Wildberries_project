@@ -10,6 +10,7 @@ export const renderElement = (tagName, options = {}) => {
     "readOnly",
     "src",
     "alt",
+    "disabled",
   ];
   for (const prop in options) {
     if (!options[prop]) {

@@ -3,16 +3,22 @@ import { createCardItemComponent } from "./components/shopping/cardItem";
 import { createAppComponent } from "./app";
 import {
   addcartItem,
+  buttonClearItemsCart,
   cartItemContainer,
   headerCounter,
   totalPrice,
 } from "./components/header/headerCart";
+import { shoppingContainer } from "./components/shopping/shopping";
+import { initStore, loadCards, saveInStorage } from "./services/dataApi";
+import { updateCounters } from "./services/counter";
 
 const url = "https://fakestoreapi.com/products";
 const getOptions = { method: "GET" };
 const getRequest = new Request(url, getOptions);
 
-// createAppComponent();
+window.addEventListener("beforeunload", () => saveInStorage());
+
+initStore();
 
 function getFromAPI() {
   fetch(getRequest)
@@ -20,58 +26,74 @@ function getFromAPI() {
     .then((data) => {
       data.forEach((item) => sourceDataprovider.add(item));
       loadCards(sourceDataprovider.read());
+      updateCounters();
     });
 }
 
-function loadCards(cardDataList) {
-  cardDataList.forEach((data) => {
-    createCardItemComponent(data);
-  });
-}
 getFromAPI();
 
-document.body.addEventListener("click", (e) => {
-  const target = e.target;
-  const card = target.closest(".card");
-  const id = card?.id;
+// document.body.addEventListener("click", (e) => {
+//   const target = e.target;
+//   const card = target.closest(".card");
+//   const id = card?.id;
 
-  if (target.classList.contains("button__to-cart")) {
-    const item = sourceDataprovider.getElement(id);
-    console.log(item);
-    cartItemContainer.innerHTML = null;
-    cardDataprovider.add(item);
+//   if (target.classList.contains("button__to-cart")) {
+//     const item = sourceDataprovider.getElement(id);
+//     item.disabled = true;
+//     cardDataprovider.add(item);
+//     console.log(cardDataprovider.read());
+//     // console.log(sourceDataprovider.read());
+//     // const cardResults = cardDataprovider.read();
+//     // const count = cardResults.map((value) => ({
+//     //   ...value,
+//     //   count: cardResults.filter((cr) => cr.id == value.id).length,
+//     //   disabledButton: (target.disabled = true),
+//     // }));
+//     cartItemContainer.innerHTML = null;
+//     cardDataprovider.read().forEach((elem) => {
+//       addcartItem(elem);
+//     });
 
-    let a = document.querySelectorAll(".card");
-    console.log(a);
-    const cardResults = cardDataprovider.read();
-    const count = cardResults.map((value) => ({
-      ...value,
-      count: cardResults.filter((cr) => cr.id == value.id).length,
-    }));
-    console.log(count);
-    target.disabled = true;
-    console.log(self);
-    count.forEach((elem) => {
-      addcartItem(elem);
-    });
+//     shoppingContainer.innerHTML = null;
 
-    headerCounter.innerHTML = cardDataprovider.updateMainCounter();
-    fullPrice.innerHTML = Math.trunc(cardDataprovider.updateFullPrice());
-  }
+//     loadCards(sourceDataprovider.read());
+//     updateCounters();
+//   }
+// });
+
+buttonClearItemsCart.addEventListener("click", () => {
+  cardDataprovider.clear();
+  cartItemContainer.innerHTML = null;
+  shoppingContainer.innerHTML = null;
+  sourceDataprovider.read().forEach((item) => (item.disabled = false));
+  loadCards(sourceDataprovider.read());
+  updateCounters();
 });
 
-document.body.addEventListener("click", (e) => {
+//delete
+cartItemContainer.addEventListener("click", (e) => {
   const target = e.target;
-  if (target.classList.contains("cart__clear-button")) {
-    cardDataprovider.clear();
-    cartItemContainer.innerHTML = null;
-    headerCounter.innerHTML = cardDataprovider.updateMainCounter();
-
-    totalPrice.innerHTML = cardDataprovider.updateFullPrice();
+  const card = target.closest(".cart__item");
+  const id = card.dataset.id;
+  console.log(id);
+  if (e.target.classList.contains("cart__button-delete")) {
+    const item = cardDataprovider.getElement(id);
+    const index = cardDataprovider.read().indexOf(item);
+    cardDataprovider.delete(index);
+    console.log(cardDataprovider.read());
+    const card = sourceDataprovider.getElement(id);
+    console.log(card);
+    card.disabled = false;
   }
-});
+  cartItemContainer.innerHTML = null;
+  shoppingContainer.innerHTML = null;
 
-let fullPrice = document.querySelector(".cart__item-total-price");
+  cardDataprovider.read().forEach((elem) => {
+    addcartItem(elem);
+  });
+  loadCards(sourceDataprovider.read());
+  updateCounters();
+});
 
 // function sameId(array) {
 //   const countItems = {};

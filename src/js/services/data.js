@@ -32,5 +32,3 @@ function createDataProvider() {
 }
 export const sourceDataprovider = createDataProvider();
 export const cardDataprovider = createDataProvider();
-
-console.log(cardDataprovider.updateMainCounter());

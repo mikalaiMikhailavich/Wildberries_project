@@ -6,6 +6,7 @@
   // height: 70px;
 
   &__icon-container {
+    position: relative;
     width: 40px;
     align-self: flex-end;
   }
@@ -51,7 +52,7 @@
     align-items: center;
   }
 
-  .cart__item-title {
+  &__item-title {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -62,6 +63,12 @@
     justify-content: space-between;
     align-items: center;
     gap: 15px;
+  }
+
+  &__icon-counter {
+    position: absolute;
+    top: -10px;
+    right: 3px;
   }
 }
 
