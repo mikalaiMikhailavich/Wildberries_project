@@ -141,11 +141,12 @@ export function addcartItem(data) {
       const item = cardDataprovider.getElement(id);
       const index = cardDataprovider.read().indexOf(item);
       cardDataprovider.delete(index);
-      const card = sourceDataprovider.getElement(id);
-      card.disabled = false;
+      sourceDataprovider.getElement(id).disabled = false;
 
       const buttonTobasket = document.querySelector(`[data-name="${id}"]`);
-      buttonTobasket.disabled = false;
+      if (buttonTobasket) {
+        buttonTobasket.disabled = false;
+      }
       cartItemContainer.innerHTML = null;
       cardDataprovider.read().forEach((elem) => {
         addcartItem(elem);
