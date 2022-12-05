@@ -5,8 +5,6 @@ import {
   addcartItem,
   buttonClearItemsCart,
   cartItemContainer,
-  headerCounter,
-  totalPrice,
 } from "./components/header/headerCart";
 import { shoppingContainer } from "./components/shopping/shopping";
 import { initStore, loadCards, saveInStorage } from "./services/dataApi";

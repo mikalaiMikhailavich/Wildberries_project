@@ -42,7 +42,7 @@ export const createCardItemComponent = (data) => {
   });
 
   const discountValue = renderElement("div", {
-    innerHTML: `${rate} % `,
+    innerHTML: `-${rate} % `,
     className: "card__discount",
   });
 
@@ -79,7 +79,7 @@ export const createCardItemComponent = (data) => {
   });
 
   const priceDiscount = renderElement("div", {
-    innerHTML: `${Math.trunc(price - price * rate * 0.01)}`,
+    innerHTML: `${Math.trunc(price - price * rate * 0.01)}$`,
     className: "card__price",
   });
 
@@ -121,33 +121,28 @@ export const createModalCardItemComponent = (data) => {
   } = data;
   const card = createContainerComponent({
     id,
-    className: "modal-win",
+    className: "modal-card",
   });
 
   const imageCard = createImageComponent({
     src: image,
     alt: alt,
-    className: "image card__image",
+    className: "image modal-card__image",
   });
 
-  const buttonOpenCard = createButtonElement({
-    className: "button button__modal",
-    value: "Быстрый просмотр",
-  });
+  // const buttonOpenCard = createButtonElement({
+  //   className: "button button__modal",
+  //   value: "Быстрый просмотр",
+  // });
 
   const discountValue = renderElement("div", {
     innerHTML: `${rate} % `,
     className: "card__discount",
   });
 
-  const buttonToBasket = createButtonElement({
-    className: inBasket ? "button button__inBasket" : "button button__to-card",
-    value: inBasket ? "В корзине" : "Добавить в корзину",
-  });
-
   const discountValueAndButtonToBasketContainer = createContainerComponent({
     className: "card__discount-and-button-container",
-    children: [discountValue, buttonToBasket],
+    children: [discountValue],
   });
 
   const priceDiscount = renderElement("div", {
@@ -176,7 +171,6 @@ export const createModalCardItemComponent = (data) => {
 
   card.append(
     imageCard,
-    buttonOpenCard,
     discountValueAndButtonToBasketContainer,
     priceDiscountAndPriceContainer,
     cardName,
@@ -200,7 +194,7 @@ document.body.addEventListener("click", (e) => {
 document.body.addEventListener("click", (e) => {
   const target = e.target;
   if (target.classList.contains("close-modal")) {
-    const mod = document.querySelector(".modal-win");
+    const mod = document.querySelector(".modal-card");
     console.log(mod);
     mod.remove();
   }
