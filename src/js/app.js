@@ -5,4 +5,3 @@ import { slider } from "./components/slider/slider";
 export function createAppComponent() {
   root.append(header, slider, shopping);
 }
-createAppComponent();

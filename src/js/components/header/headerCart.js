@@ -2,7 +2,10 @@ import svgcart from "bundle-text:../../../assets/icons/cart.svg";
 import { renderElement } from "../createElements/index";
 import { createButtonElement } from "../createElements/index";
 import { createContainerComponent } from "../createElements";
-import { cardDataprovider } from "../../services/data";
+import { cardDataprovider, sourceDataprovider } from "../../services/data";
+import { shoppingContainer } from "../shopping/shopping";
+import { loadCards } from "../../services/dataApi";
+import { updateCounters } from "../../services/counter";
 
 //cart-header
 export const buttonClearItemsCart = createButtonElement({
@@ -54,7 +57,7 @@ export const headerCounter = renderElement("div", {
   className: "cart__icon-counter",
   innerHTML: `${cardDataprovider.updateMainCounter()}`,
 });
-console.log(cardDataprovider.updateMainCounter());
+
 // котнейнер иконки
 const cartIconInner = createContainerComponent({
   className: "cart__icon-container",
@@ -116,6 +119,26 @@ export function addcartItem(data) {
   const itemDelete = createButtonElement({
     className: "cart__button-delete",
     value: "x",
+    onClick: (e) => {
+      const target = e.target;
+      const card = target.closest(".cart__item");
+      const id = card.dataset.id;
+      if (e.target.classList.contains("cart__button-delete")) {
+        const item = cardDataprovider.getElement(id);
+        const index = cardDataprovider.read().indexOf(item);
+        cardDataprovider.delete(index);
+        const card = sourceDataprovider.getElement(id);
+        card.disabled = false;
+      }
+      cartItemContainer.innerHTML = null;
+      shoppingContainer.innerHTML = null;
+
+      cardDataprovider.read().forEach((elem) => {
+        addcartItem(elem);
+      });
+      loadCards(sourceDataprovider.read());
+      updateCounters();
+    },
   });
 
   elem.append(itemTitle, itemPrice, cartCountContainer, itemDelete);

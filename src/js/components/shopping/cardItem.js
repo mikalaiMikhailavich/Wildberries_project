@@ -71,8 +71,6 @@ export const createCardItemComponent = (data) => {
   const inCart = cardDataprovider.getElement(id) != null;
   buttonToBasket.disabled = disabled || inCart;
 
-  console.log(buttonToBasket.disabled);
-
   const discountValueAndButtonToBasketContainer = createContainerComponent({
     className: "card__discount-and-button-container",
     children: [discountValue, buttonToBasket],
