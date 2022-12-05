@@ -39,6 +39,16 @@ export const createCardItemComponent = (data) => {
   const buttonOpenCard = createButtonElement({
     className: "button button__modal",
     value: "Быстрый просмотр",
+    onClick: (e) => {
+      const target = e.target;
+      const card = target.closest(".card");
+      const id = card?.id;
+      if (target.classList.contains("button__modal")) {
+        const item = sourceDataprovider.getElement(id);
+        createModalCardItemComponent(item);
+        cartContainer.classList.add("hide");
+      }
+    },
   });
 
   const discountValue = renderElement("div", {
@@ -111,7 +121,6 @@ export const createModalCardItemComponent = (data) => {
   const {
     id,
     title,
-    inBasket,
     image,
     alt,
     price,
@@ -165,6 +174,13 @@ export const createModalCardItemComponent = (data) => {
   const close = createButtonElement({
     className: "close-modal",
     value: "x",
+    onClick: (e) => {
+      const target = e.target;
+      if (target.classList.contains("close-modal")) {
+        const modal = document.querySelector(".modal-card");
+        modal.remove();
+      }
+    },
   });
 
   card.append(
@@ -177,23 +193,3 @@ export const createModalCardItemComponent = (data) => {
   modal.append(card);
   return card;
 };
-
-document.body.addEventListener("click", (e) => {
-  const target = e.target;
-  const card = target.closest(".card");
-  const id = card?.id;
-  if (target.classList.contains("button__modal")) {
-    const item = sourceDataprovider.getElement(id);
-    createModalCardItemComponent(item);
-    cartContainer.classList.add("hide");
-  }
-});
-
-document.body.addEventListener("click", (e) => {
-  const target = e.target;
-  if (target.classList.contains("close-modal")) {
-    const mod = document.querySelector(".modal-card");
-    console.log(mod);
-    mod.remove();
-  }
-});
