@@ -39,7 +39,7 @@ const totalPriceText = renderElement("h4", {
 
 export const totalPrice = renderElement("h4", {
   className: "cart__item-total-price",
-  innerHTML: "0",
+  innerHTML: "0$",
 });
 
 const cartFooter = createContainerComponent({
@@ -88,7 +88,6 @@ export function addcartItem(data) {
     title,
     price,
     id,
-    // count,
     rating: { rate },
   } = data;
 
@@ -101,12 +100,12 @@ export function addcartItem(data) {
   });
 
   const itemPrice = renderElement("h4", {
-    innerHTML: `${Math.trunc(price - price * rate * 0.01)}`,
+    innerHTML: `${Math.trunc(price - price * rate * 0.01)}$`,
   });
   console.log();
 
   const itemDelete = createButtonElement({
-    className: "cart__button-delete",
+    className: "button cart__button-delete",
     value: "x",
     onClick: () => {
       const item = cardDataprovider.getElement(id);
@@ -114,7 +113,6 @@ export function addcartItem(data) {
       cardDataprovider.delete(index);
       const card = sourceDataprovider.getElement(id);
       card.disabled = false;
-
       const buttonTobasket = document.querySelector(`[data-name="${id}"]`);
       if (buttonTobasket) {
         buttonTobasket.disabled = false;

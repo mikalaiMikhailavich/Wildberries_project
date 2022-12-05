@@ -57,6 +57,7 @@ input[type="button"] {
 .button {
   cursor: pointer;
   border: none;
+  transition: all 0.3s ease-in-out;
   &__modal {
     position: absolute;
     left: 50%;
@@ -71,6 +72,10 @@ input[type="button"] {
     cursor: pointer;
     padding: 10px 11px;
     border: none;
+  }
+
+  &__modal:hover {
+    background-color: rgba(143, 142, 142, 0.9);
   }
 
   &__to-cart {
@@ -92,13 +97,8 @@ input[type="button"] {
   &__to-cart:active {
     box-shadow: none;
   }
-  &__clear-button {
-    color: #fff;
-    height: 30px;
-    width: 50%;
-    appearance: none;
-    background-color: #cb11ab;
-    border-color: #cb11ab;
-    border-radius: 10px;
+
+  &__to-cart:hover() {
+    box-shadow: inset 4px 4px #6d0f5db2;
   }
 }

@@ -54,23 +54,18 @@ export const createCardItemComponent = (data) => {
   const buttonToBasket = createButtonElement({
     className: "button button__to-cart",
     value: "Добавить в корзину",
-    onClick: (e) => {
-      const target = e.target;
-      const card = target.closest(".card");
-      const id = card?.id;
+    onClick: () => {
+      const card = sourceDataprovider.getElement(id);
+      console.log(card);
+      card.disabled = true;
+      cardDataprovider.add(card);
+      cartItemContainer.innerHTML = null;
+      cardDataprovider.read().forEach((elem) => {
+        addcartItem(elem);
+      });
+      buttonToBasket.disabled = true;
 
-      if (target.classList.contains("button__to-cart")) {
-        const card = sourceDataprovider.getElement(id);
-        card.disabled = true;
-        cardDataprovider.add(card);
-        cartItemContainer.innerHTML = null;
-        cardDataprovider.read().forEach((elem) => {
-          addcartItem(elem);
-        });
-        buttonToBasket.disabled = true;
-
-        updateCounters();
-      }
+      updateCounters();
     },
   });
   buttonToBasket.dataset.name = id;

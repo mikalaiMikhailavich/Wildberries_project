@@ -66,9 +66,33 @@
   }
 
   &__icon-counter {
+    color: #cb11ab;
     position: absolute;
     top: -10px;
     right: 3px;
+  }
+
+  &__clear-button {
+    color: #fff;
+    height: 30px;
+    width: 50%;
+    appearance: none;
+    background-color: $button-color;
+    border-color: $button-color;
+    border-radius: 10px;
+  }
+
+  &__button-delete {
+    background-color: $button-color;
+    border-color: $button-color;
+    appearance: none;
+    font-size: 18px;
+    width: 10%;
+    border-radius: 15%;
+    transition: all 0.3s ease-in;
+  }
+  &__button-delete:hover {
+    box-shadow: inset 4px 4px #6d0f5db2;
   }
 }
 
