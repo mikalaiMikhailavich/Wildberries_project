@@ -70,10 +70,13 @@ export const createCardItemComponent = (data) => {
         // shoppingContainer.innerHTML = null;
         // loadCards(sourceDataprovider.read());
         buttonToBasket.disabled = true;
+
         updateCounters();
       }
     },
   });
+  buttonToBasket.dataset.name = id;
+
   const inCart = cardDataprovider.getElement(id) != null;
   buttonToBasket.disabled = disabled || inCart;
 

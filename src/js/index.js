@@ -1,7 +1,5 @@
 import { sourceDataprovider, cardDataprovider } from "../js/services/data";
-// import { createCardItemComponent } from "./components/shopping/cardItem";
 import { createAppComponent } from "./app";
-
 import { initStore, loadCards, saveInStorage } from "./services/dataApi";
 import { updateCounters } from "./services/counter";
 
@@ -17,10 +15,10 @@ function getFromAPI() {
   fetch(getRequest)
     .then((response) => response.json())
     .then((data) => {
-      data.map((elem) => {
-        const isInCart = cardDataprovider.getElement(elem.id) != null;
-        return { ...elem, disabled: isInCart };
-      });
+      // data.map((elem) => {
+      //   const isInCart = cardDataprovider.getElement(elem.id) != null;
+      //   return { ...elem, disabled: isInCart };
+      // });
       data.forEach((item) => sourceDataprovider.add(item));
       loadCards(sourceDataprovider.read());
       updateCounters();

@@ -21,7 +21,9 @@ function createDataProvider() {
     },
     updateFullPrice: function () {
       fullPrice = [...source].reduce((acc, item) => {
-        return item.price + acc;
+        return Math.trunc(
+          item.price - item.price * item.rating.rate * 0.01 + acc
+        );
       }, 0);
       return fullPrice;
     },

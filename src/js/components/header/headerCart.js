@@ -14,10 +14,9 @@ export const buttonClearItemsCart = createButtonElement({
   onClick: () => {
     cardDataprovider.clear();
     cartItemContainer.innerHTML = null;
-    shoppingContainer.innerHTML = null;
+    const buttonToBasket = document.querySelectorAll(".button__to-cart");
+    buttonToBasket.forEach((elem) => (elem.disabled = false));
     sourceDataprovider.read().forEach((item) => (item.disabled = false));
-    loadCards(sourceDataprovider.read());
-
     updateCounters();
   },
 });
@@ -108,6 +107,10 @@ export function addcartItem(data) {
   const cartCountDecrease = createButtonElement({
     className: "cart__button-decrease",
     value: "-",
+    onClick: () => {
+      const item = cardDataprovider.getElement(id);
+      console.log(item);
+    },
   });
 
   const cartCount = renderElement("div", {
@@ -118,6 +121,12 @@ export function addcartItem(data) {
   const cartCountIncrease = createButtonElement({
     className: "cart__button-increase",
     value: "+",
+    onClick: () => {
+      const item = cardDataprovider.getElement(id);
+      console.log(item);
+      // cardDataprovider.add(item);
+      // updateCounters();
+    },
   });
 
   const cartCountContainer = createContainerComponent({
@@ -128,24 +137,19 @@ export function addcartItem(data) {
   const itemDelete = createButtonElement({
     className: "cart__button-delete",
     value: "x",
-    onClick: (e) => {
-      const target = e.target;
-      const card = target.closest(".cart__item");
-      const id = card.dataset.id;
-      if (e.target.classList.contains("cart__button-delete")) {
-        const item = cardDataprovider.getElement(id);
-        const index = cardDataprovider.read().indexOf(item);
-        cardDataprovider.delete(index);
-        const card = sourceDataprovider.getElement(id);
-        card.disabled = false;
-      }
-      cartItemContainer.innerHTML = null;
-      shoppingContainer.innerHTML = null;
+    onClick: () => {
+      const item = cardDataprovider.getElement(id);
+      const index = cardDataprovider.read().indexOf(item);
+      cardDataprovider.delete(index);
+      const card = sourceDataprovider.getElement(id);
+      card.disabled = false;
 
+      const buttonTobasket = document.querySelector(`[data-name="${id}"]`);
+      buttonTobasket.disabled = false;
+      cartItemContainer.innerHTML = null;
       cardDataprovider.read().forEach((elem) => {
         addcartItem(elem);
       });
-      loadCards(sourceDataprovider.read());
       updateCounters();
     },
   });
