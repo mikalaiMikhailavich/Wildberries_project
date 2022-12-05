@@ -104,36 +104,6 @@ export function addcartItem(data) {
     innerHTML: `${Math.trunc(price - price * rate * 0.01)}`,
   });
   console.log();
-  const cartCountDecrease = createButtonElement({
-    className: "cart__button-decrease",
-    value: "-",
-    onClick: () => {
-      const item = cardDataprovider.getElement(id);
-      console.log(item);
-    },
-  });
-
-  const cartCount = renderElement("div", {
-    className: "cart__count",
-    // innerHTML: ,
-  });
-  let count = cardDataprovider.read().filter((elem) => (elem.id = id)).length;
-  console.log(count);
-  const cartCountIncrease = createButtonElement({
-    className: "cart__button-increase",
-    value: "+",
-    onClick: () => {
-      const item = cardDataprovider.getElement(id);
-      console.log(item);
-      // cardDataprovider.add(item);
-      // updateCounters();
-    },
-  });
-
-  const cartCountContainer = createContainerComponent({
-    className: "cart__count",
-    children: [cartCountDecrease, cartCount, cartCountIncrease],
-  });
 
   const itemDelete = createButtonElement({
     className: "cart__button-delete",
@@ -146,7 +116,9 @@ export function addcartItem(data) {
       card.disabled = false;
 
       const buttonTobasket = document.querySelector(`[data-name="${id}"]`);
-      buttonTobasket.disabled = false;
+      if (buttonTobasket) {
+        buttonTobasket.disabled = false;
+      }
       cartItemContainer.innerHTML = null;
       cardDataprovider.read().forEach((elem) => {
         addcartItem(elem);
@@ -155,7 +127,7 @@ export function addcartItem(data) {
     },
   });
 
-  elem.append(itemTitle, itemPrice, cartCountContainer, itemDelete);
+  elem.append(itemTitle, itemPrice, itemDelete);
   cartItemContainer.append(elem);
   return elem;
 }

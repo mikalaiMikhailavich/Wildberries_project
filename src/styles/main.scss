@@ -92,4 +92,13 @@ input[type="button"] {
   &__to-cart:active {
     box-shadow: none;
   }
+  &__clear-button {
+    color: #fff;
+    height: 30px;
+    width: 50%;
+    appearance: none;
+    background-color: #cb11ab;
+    border-color: #cb11ab;
+    border-radius: 10px;
+  }
 }
