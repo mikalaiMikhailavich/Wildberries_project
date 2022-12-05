@@ -11,6 +11,14 @@ import { updateCounters } from "../../services/counter";
 export const buttonClearItemsCart = createButtonElement({
   className: "button cart__clear-button",
   value: "Очистить корзину",
+  onClick: () => {
+    cardDataprovider.clear();
+    cartItemContainer.innerHTML = null;
+    shoppingContainer.innerHTML = null;
+    sourceDataprovider.read().forEach((item) => (item.disabled = false));
+    loadCards(sourceDataprovider.read());
+    updateCounters();
+  },
 });
 
 const cartTitle = renderElement("h3", {

@@ -34,13 +34,4 @@ function getFromAPI() {
 
 getFromAPI();
 
-buttonClearItemsCart.addEventListener("click", () => {
-  cardDataprovider.clear();
-  cartItemContainer.innerHTML = null;
-  shoppingContainer.innerHTML = null;
-  sourceDataprovider.read().forEach((item) => (item.disabled = false));
-  loadCards(sourceDataprovider.read());
-  updateCounters();
-});
-
 createAppComponent();
