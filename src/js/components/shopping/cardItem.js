@@ -67,8 +67,6 @@ export const createCardItemComponent = (data) => {
         cardDataprovider.read().forEach((elem) => {
           addcartItem(elem);
         });
-        // shoppingContainer.innerHTML = null;
-        // loadCards(sourceDataprovider.read());
         buttonToBasket.disabled = true;
 
         updateCounters();
