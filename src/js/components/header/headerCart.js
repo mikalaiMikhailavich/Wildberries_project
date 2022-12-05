@@ -115,9 +115,10 @@ export function addcartItem(data) {
 
   const cartCount = renderElement("div", {
     className: "cart__count",
-    // innerHTML: count,
+    // innerHTML: ,
   });
-
+  let count = cardDataprovider.read().filter((elem) => (elem.id = id)).length;
+  console.log(count);
   const cartCountIncrease = createButtonElement({
     className: "cart__button-increase",
     value: "+",
