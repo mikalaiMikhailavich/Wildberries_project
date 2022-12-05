@@ -17,6 +17,7 @@ export const buttonClearItemsCart = createButtonElement({
     shoppingContainer.innerHTML = null;
     sourceDataprovider.read().forEach((item) => (item.disabled = false));
     loadCards(sourceDataprovider.read());
+
     updateCounters();
   },
 });

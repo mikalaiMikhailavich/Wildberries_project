@@ -1,12 +1,7 @@
 import { sourceDataprovider, cardDataprovider } from "../js/services/data";
 // import { createCardItemComponent } from "./components/shopping/cardItem";
 import { createAppComponent } from "./app";
-import {
-  addcartItem,
-  buttonClearItemsCart,
-  cartItemContainer,
-} from "./components/header/headerCart";
-import { shoppingContainer } from "./components/shopping/shopping";
+
 import { initStore, loadCards, saveInStorage } from "./services/dataApi";
 import { updateCounters } from "./services/counter";
 

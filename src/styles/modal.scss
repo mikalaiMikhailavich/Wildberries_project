@@ -9,12 +9,47 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: rgb(211 211 211 / 50%);
+  background: rgba(82, 74, 74, 0.705);
   visibility: visible;
   overflow-y: hidden;
 
   &__image {
     width: 65% !important;
     height: 400px;
+  }
+
+  &__discount {
+    color: #cb11ab;
+    width: 23%;
+  }
+
+  &__discount-and-button-container {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__price-and-price-discount-container {
+    margin-top: 15px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+
+  &:hover .button__modal {
+    opacity: 1;
+  }
+  &__title {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
+  &__price {
+    font-size: 24px;
+  }
+
+  &__price_crossed-out {
+    text-decoration: line-through;
+    font-size: 18px;
   }
 }

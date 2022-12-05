@@ -67,8 +67,9 @@ export const createCardItemComponent = (data) => {
         cardDataprovider.read().forEach((elem) => {
           addcartItem(elem);
         });
-        shoppingContainer.innerHTML = null;
-        loadCards(sourceDataprovider.read());
+        // shoppingContainer.innerHTML = null;
+        // loadCards(sourceDataprovider.read());
+        buttonToBasket.disabled = true;
         updateCounters();
       }
     },
@@ -119,6 +120,7 @@ export const createModalCardItemComponent = (data) => {
     image,
     alt,
     price,
+    description,
     rating: { rate },
   } = data;
   const card = createContainerComponent({
@@ -132,33 +134,28 @@ export const createModalCardItemComponent = (data) => {
     className: "image modal-card__image",
   });
 
-  // const buttonOpenCard = createButtonElement({
-  //   className: "button button__modal",
-  //   value: "Быстрый просмотр",
-  // });
-
   const discountValue = renderElement("div", {
     innerHTML: `${rate} % `,
-    className: "card__discount",
+    className: "modal-card__discount",
   });
 
   const discountValueAndButtonToBasketContainer = createContainerComponent({
-    className: "card__discount-and-button-container",
+    className: "modal-card__discount-and-button-container",
     children: [discountValue],
   });
 
   const priceDiscount = renderElement("div", {
     innerHTML: `${Math.trunc(price - price * rate * 0.01)}`,
-    className: "card__price",
+    className: "modal-card__price",
   });
 
   const priceElement = renderElement("div", {
     innerHTML: price,
-    className: "card__price card__price_crossed-out",
+    className: "card__price modal-card__price_crossed-out",
   });
 
   const priceDiscountAndPriceContainer = createContainerComponent({
-    className: "card__price-and-price-discount-container",
+    className: "modal-card__price-and-price-discount-container",
     children: [priceDiscount, priceElement],
   });
 
@@ -167,7 +164,7 @@ export const createModalCardItemComponent = (data) => {
   });
 
   const close = createButtonElement({
-    className: "close-modal",
+    className: "modal-card__close",
     value: "x",
     onClick: () => {
       const modal = document.querySelector(".modal-card");
@@ -185,3 +182,5 @@ export const createModalCardItemComponent = (data) => {
   modal.append(card);
   return card;
 };
+
+//{"id":1,"title":"Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops","price":109.95,"description":"Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday","category":"men's clothing","image":"https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg","rating":{"rate":3.9,"count":120}}
