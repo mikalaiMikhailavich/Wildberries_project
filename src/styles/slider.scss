@@ -5,15 +5,41 @@
     position: relative;
   }
   &__button-left {
+    border-radius: 50%;
+    border: none;
+    opacity: 0.5;
+    background: white;
+    top: 50%;
+    transform: translateY(-50%);
+    position: absolute;
     width: 40px;
     height: 40px;
     cursor: pointer;
+    transition: all 0.3s ease-in-out;
   }
   &__button-right {
+    transition: all 0.3s ease-in-out;
+
+    border: none;
+    border-radius: 50%;
+    background: white;
+    opacity: 0.5;
+    right: 0;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
     width: 40px;
     height: 40px;
     cursor: pointer;
   }
+
+  &__button-left:hover {
+    opacity: 1;
+  }
+  &__button-right:hover {
+    opacity: 1;
+  }
+
   &__image {
     width: 100%;
     display: block;

@@ -49,7 +49,7 @@ const sliderContainer = createContainerComponent({
   className: "container slider__container",
 });
 
-sliderContainer.append(buttonContainer, sliderInner);
+sliderContainer.append(buttonRight, buttonLeft, sliderInner);
 
 export const slider = createContainerComponent({
   id: "slider",

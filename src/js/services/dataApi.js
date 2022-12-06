@@ -1,8 +1,13 @@
 import { addcartItem } from "../components/header/headerCart";
 import { createCardItemComponent } from "../components/shopping/cardItem";
-import { cardDataprovider } from "./data";
+import { updateCounters } from "./counter";
+import { cardDataprovider, sourceDataprovider } from "./data";
 
 const localStorageDataKey = "wildberries";
+
+const url = "https://fakestoreapi.com/products";
+const getOptions = { method: "GET" };
+const getRequest = new Request(url, getOptions);
 
 export const initStore = () => {
   const storageData = localStorage.getItem(localStorageDataKey);
@@ -31,4 +36,18 @@ export function loadCards(cardDataList) {
   cardDataList.forEach((data) => {
     createCardItemComponent(data);
   });
+}
+
+export function getFromAPI() {
+  fetch(getRequest)
+    .then((response) => response.json())
+    .then((data) => {
+      // data.map((elem) => {
+      //   const isInCart = cardDataprovider.getElement(elem.id) != null;
+      //   return { ...elem, disabled: isInCart };
+      // });
+      data.forEach((item) => sourceDataprovider.add(item));
+      loadCards(sourceDataprovider.read());
+      updateCounters();
+    });
 }
