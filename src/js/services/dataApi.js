@@ -1,7 +1,7 @@
-import { addcartItem } from "../components/header/headerCart";
-import { createCardItemComponent } from "../components/shopping/cardItem";
-import { updateCounters } from "./counter";
 import { cardDataprovider, sourceDataprovider } from "./data";
+import { createCardItemComponent } from "../components/shopping/cardItem";
+import { addcartItem } from "../components/header/headerCart";
+import { updateCounters } from "./counter";
 
 const localStorageDataKey = "wildberries";
 
