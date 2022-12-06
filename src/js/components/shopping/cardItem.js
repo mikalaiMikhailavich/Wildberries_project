@@ -42,7 +42,8 @@ export const createCardItemComponent = (data) => {
     onClick: () => {
       const item = sourceDataprovider.getElement(id);
       createModalCardItemComponent(item);
-      cartContainer.classList.add("hide");
+      // cartContainer.classList.add("hide");
+      cartContainer.classList.remove("show");
     },
   });
 
@@ -119,6 +120,7 @@ export const createModalCardItemComponent = (data) => {
     description,
     rating: { rate },
   } = data;
+
   const card = createContainerComponent({
     id,
     className: "modal-card",
@@ -130,32 +132,8 @@ export const createModalCardItemComponent = (data) => {
     className: "image modal-card__image",
   });
 
-  const discountValue = renderElement("div", {
-    innerHTML: `${rate} % `,
-    className: "modal-card__discount",
-  });
-
-  const discountValueAndButtonToBasketContainer = createContainerComponent({
-    className: "modal-card__discount-and-button-container",
-    children: [discountValue],
-  });
-
-  const priceDiscount = renderElement("div", {
-    innerHTML: `${Math.trunc(price - price * rate * 0.01)}`,
-    className: "modal-card__price",
-  });
-
-  const priceElement = renderElement("div", {
-    innerHTML: price,
-    className: "card__price modal-card__price_crossed-out",
-  });
-
-  const priceDiscountAndPriceContainer = createContainerComponent({
-    className: "modal-card__price-and-price-discount-container",
-    children: [priceDiscount, priceElement],
-  });
-
   const cardName = renderElement("div", {
+    className: "modal-card__name",
     innerHTML: title,
   });
 
@@ -168,13 +146,12 @@ export const createModalCardItemComponent = (data) => {
     },
   });
 
-  card.append(
-    imageCard,
-    discountValueAndButtonToBasketContainer,
-    priceDiscountAndPriceContainer,
-    cardName,
-    close
-  );
+  const imageCardContainer = createContainerComponent({
+    className: "modal-card__image-container",
+    children: [imageCard, cardName, close],
+  });
+
+  card.append(imageCardContainer);
   modal.append(card);
   return card;
 };

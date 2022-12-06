@@ -131,5 +131,5 @@ export function addcartItem(data) {
 }
 
 cartIconInner.addEventListener("click", () =>
-  cartContainer.classList.toggle("hide")
+  cartContainer.classList.toggle("show")
 );

@@ -3,6 +3,7 @@
 @import "card";
 @import "cart";
 @import "header";
+@import "slider";
 @import "shopping";
 @import "modal";
 
@@ -93,12 +94,15 @@ input[type="button"] {
     border-color: grey;
     color: white;
     box-shadow: 0;
+    &:hover {
+      box-shadow: none;
+    }
   }
-  &__to-cart:active {
-    box-shadow: none;
-  }
+  // &__to-cart:active {
+  //   box-shadow: none;
+  // }
 
-  &__to-cart:hover() {
+  &__to-cart:hover {
     box-shadow: inset 4px 4px #6d0f5db2;
   }
 }
