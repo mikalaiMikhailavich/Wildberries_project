@@ -22,12 +22,11 @@
   }
 
   &__name {
-    position: absolute;
+    // position: absolute;
     font-size: 20px;
     color: $button-color;
     bottom: 25px;
     left: 50%;
-    transform: translateX(-50%);
   }
   &__content-container {
     display: flex;
@@ -80,5 +79,6 @@
     border-color: $button-color;
     appearance: none;
     border-radius: 5px;
+    cursor: pointer;
   }
 }
