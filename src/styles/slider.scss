@@ -1,4 +1,6 @@
 .slider {
+  margin-top: 30px;
+
   &__container {
     position: relative;
   }
@@ -15,6 +17,11 @@
   &__image {
     width: 100%;
     display: block;
+  }
+
+  &__inner {
+    border-radius: 20px;
+    overflow: hidden;
   }
   &__button-container {
     position: absolute;
