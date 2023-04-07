@@ -5,7 +5,7 @@
   "scripts": {
     "clean": "rimraf dist",
     "start": "parcel index.html --open --no-cache",
-    "build": "parcel build ./index.html --dist-dir output"
+    "build": "parcel build ./index.html --dist-dir dist"
   },
   "repository": {
     "type": "git",
