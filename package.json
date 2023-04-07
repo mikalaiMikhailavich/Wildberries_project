@@ -5,7 +5,8 @@
   "main": "./src/js/index.js",
   "scripts": {
     "clean": "rimraf dist",
-    "start": "parcel index.html --open --no-cache"
+    "start": "parcel index.html --open --no-cache",
+    "build": "parcel build --dist-dir public"
   },
   "repository": {
     "type": "git",
